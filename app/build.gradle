@@ -49,8 +49,8 @@ android {
             applicationId 'io.github.cottenplant.mobyfiles'
             // Upstream code x 100 + Moby rebuild number: monotonic across both
             // fork-only rebuilds and rebases onto later upstream releases.
-            versionCode android.defaultConfig.versionCode * 100 + 1
-            versionName android.defaultConfig.versionName + '-moby.1'
+            versionCode android.defaultConfig.versionCode * 100 + 2
+            versionName android.defaultConfig.versionName + '-moby.2'
             resValue 'string', 'app_version', versionName + ' (' + versionCode + ')'
         }
     }
