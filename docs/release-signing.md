@@ -206,14 +206,17 @@ Verification does not require the private key. Run it after the key medium is
 disconnected:
 
 ```sh
-apksigner verify --verbose --print-certs -Werr \
+apksigner verify --verbose --print-certs \
   <private-release-workspace>/MobyFiles-<version>-signed.apk
 ```
 
 Require successful verification and record which APK signature schemes verify.
 Compare the signer's SHA-256 certificate digest exactly with the independently
-recorded ceremony fingerprint. Stop on any mismatch, extra signer, warning, or
-unexpected signature scheme.
+recorded ceremony fingerprint. Stop on any mismatch, extra signer, unexpected
+signature scheme, or warning other than the `META-INF/... not protected by
+signature` series. Those warnings are inherent to v1 (JAR) signing, which the
+minimum SDK requires, because JAR signatures exclude `META-INF/` by design;
+`-Werr` would therefore always fail and is not used.
 
 Then repeat the non-secret artifact checks:
 

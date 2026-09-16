@@ -62,9 +62,10 @@ installation, publication, or distribution.
   `.gradle/phase-3f/inbox/MobyFiles-1.7.4-moby.1-rc1-sign-b.apk`. These APKs are
   intended to contain only public release content and the generic certificate
   identity fixed by Phase 3C.
-- Inspect those two APKs with `apksigner verify --verbose -Werr` without
+- Inspect those two APKs with `apksigner verify --verbose` without
   `--print-certs`, `aapt dump badging`, `zipalign`, byte comparison, size, and
-  SHA-256 tools. Do not extract, print, or record certificate fields.
+  SHA-256 tools. The v1 `META-INF/... not protected by signature` warnings are
+  expected; any other warning stops the phase. Do not extract, print, or record certificate fields.
 - Record non-secret source, toolchain, task, artifact size and digest,
   reproducibility, package, alignment, and signature-scheme results in the
   tracked Phase 3F report. Keep certificate fingerprint and expiry values only
@@ -199,9 +200,10 @@ data.
   retains the recorded size and digest before and after user signing work.
 - The release owner reports `PASS` for `F1` through `F8` without disclosing any
   excluded data.
-- Each returned APK passes `apksigner verify --verbose -Werr`, reports the
-  expected embedded signature schemes, passes `zipalign`, and retains the
-  expected package, version, SDK, ABI, and label metadata.
+- Each returned APK passes `apksigner verify --verbose` with no warning beyond
+  the v1 `META-INF/` exclusions, reports the expected embedded signature
+  schemes, passes `zipalign`, and retains the expected package, version, SDK,
+  ABI, and label metadata.
 - The returned APKs compare byte-for-byte with equal size and SHA-256 digest,
   establishing same-host deterministic signed output for this input, toolchain,
   and key. The unsigned canonical APK remains unchanged.
